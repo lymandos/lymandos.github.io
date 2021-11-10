@@ -249,6 +249,22 @@
   
 
       
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../miscellaneous/snowflake/" class="md-tabs__link">
+        Miscellaneous
+      </a>
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -482,6 +498,48 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Miscellaneous
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Miscellaneous" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Miscellaneous
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../miscellaneous/snowflake/" class="md-nav__link">
+        Snowflake
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -588,9 +646,23 @@ expire_logs_days=10
 2.MongoDB<br />
 3.Kafka  </p>
 <h3 id="source">Source<a class="headerlink" href="#source" title="Permanent link">&para;</a></h3>
-<p>TODO</p>
+<p>register source:
+<div class="highlight"><pre><span></span><code>PODNAME=`kubectl -n common get pod -l app=debezium-controller | awk &#39;NR&gt;1{print $1}&#39;`
+kubectl -n common exec -it $PODNAME -- curl -i -X POST -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; http://debezium:8083/connectors/ -d @/controller/source-mysql-mariadb.storage.json
+</code></pre></div></p>
 <h3 id="sink">Sink<a class="headerlink" href="#sink" title="Permanent link">&para;</a></h3>
-<p>TODO</p>
+<p>register sink:
+<div class="highlight"><pre><span></span><code>PODNAME=`kubectl -n common get pod -l app=debezium-controller | awk &#39;NR&gt;1{print $1}&#39;`
+kubectl -n common exec -it $PODNAME -- curl -i -X POST -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; http://debezium:8083/connectors/ -d @/controller/sink-mongodb-mariadb.storage.account-address.json
+</code></pre></div></p>
+<details class="faq"><summary>How do i operate registered connectors?</summary><div class="highlight"><pre><span></span><code>list all registered connectors:
+  PODNAME=`kubectl -n common get pod -l app=debezium-controller | awk &#39;NR&gt;1{print $1}&#39;`
+  kubectl -n common exec -it $PODNAME -- curl -X GET -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; http://debezium:8083/connectors
+delete particular connector:
+  PODNAME=`kubectl -n common get pod -l app=debezium-controller | awk &#39;NR&gt;1{print $1}&#39;`
+  kubectl -n common exec -it $PODNAME -- curl -X DELETE -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; http://debezium:8083/connectors/&lt;connector-name&gt;
+</code></pre></div>
+</details>
 <h3 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h3>
 <p>1.<a href="https://debezium.io/documentation/reference/connectors/mysql.html#enable-mysql-binlog" target="_blank">Enable mysql binlog</a><br />
 2.<a href="https://debezium.io/documentation/reference/architecture.html" target="_blank">Debezium architecture</a>  </p>
@@ -632,6 +704,21 @@ expire_logs_days=10
           </div>
         </a>
       
+      
+        
+        <a href="../../miscellaneous/snowflake/" class="md-footer__link md-footer__link--next" aria-label="Next: Snowflake" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Snowflake
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
       
     </nav>
   
