@@ -13,14 +13,14 @@
         <meta name="author" content="Lujun He">
       
       
-        <link rel="canonical" href="https://lymandos.github.io/database/cdc/">
+        <link rel="canonical" href="https://lymandos.github.io/database/sqlserver/">
       
       <link rel="icon" href="../../assets/favicon-custom.png">
       <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.2.0">
     
     
       
-        <title>Change data capture - Lymando's</title>
+        <title>SQLServer - Lymando's</title>
       
     
     
@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#architecture" class="md-skip">
+        <a href="#backup-strategies" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Change data capture
+              SQLServer
             
           </span>
         </div>
@@ -242,7 +242,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../sqlserver/" class="md-tabs__link md-tabs__link--active">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
         Database
       </a>
     </li>
@@ -400,18 +400,6 @@
             
   
   
-  
-    <li class="md-nav__item">
-      <a href="../sqlserver/" class="md-nav__link">
-        SQLServer
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
     
   
   
@@ -422,12 +410,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Change data capture
+          SQLServer
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Change data capture
+        SQLServer
       </a>
       
         
@@ -443,56 +431,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
-    Architecture
-  </a>
-  
-    <nav class="md-nav" aria-label="Architecture">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-    <nav class="md-nav" aria-label="Prerequisites">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enable-mysql-binlog" class="md-nav__link">
-    Enable mysql binlog.
+  <a href="#backup-strategies" class="md-nav__link">
+    Backup strategies
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#source" class="md-nav__link">
-    Source
+      
+        <li class="md-nav__item">
+  <a href="#how-can-i-recover-database-which-deleted-log-file" class="md-nav__link">
+    How can i recover database which deleted log file?
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sink" class="md-nav__link">
-    Sink
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reference" class="md-nav__link">
-    Reference
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -500,6 +448,18 @@
   
 </nav>
       
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cdc/" class="md-nav__link">
+        Change data capture
+      </a>
     </li>
   
 
@@ -576,56 +536,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
-    Architecture
-  </a>
-  
-    <nav class="md-nav" aria-label="Architecture">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-    <nav class="md-nav" aria-label="Prerequisites">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enable-mysql-binlog" class="md-nav__link">
-    Enable mysql binlog.
+  <a href="#backup-strategies" class="md-nav__link">
+    Backup strategies
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#source" class="md-nav__link">
-    Source
+      
+        <li class="md-nav__item">
+  <a href="#how-can-i-recover-database-which-deleted-log-file" class="md-nav__link">
+    How can i recover database which deleted log file?
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sink" class="md-nav__link">
-    Sink
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reference" class="md-nav__link">
-    Reference
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -642,42 +562,31 @@
               
                 
                 
-                  <h1>Change data capture</h1>
+                  <h1>SQLServer</h1>
                 
-                <h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
-<p><img alt="debezium-architecture" src="https://debezium.io/documentation/reference/stable/_images/debezium-architecture.png" title="debezium-architecture" /></p>
-<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
-<p>1.Mysql  </p>
-<h4 id="enable-mysql-binlog">Enable mysql binlog.<a class="headerlink" href="#enable-mysql-binlog" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code>server-id=&lt;server-id, or ignore this item&gt;
-log_bin=mysql-bin
-binlog_format=row
-binlog_row_image=full
-expire_logs_days=10
-</code></pre></div>
-2.MongoDB<br />
-3.Kafka  </p>
-<h3 id="source">Source<a class="headerlink" href="#source" title="Permanent link">&para;</a></h3>
-<p>register source:
-<div class="highlight"><pre><span></span><code>PODNAME=`kubectl -n common get pod -l app=debezium-controller | awk &#39;NR&gt;1{print $1}&#39;`
-kubectl -n common exec -it $PODNAME -- curl -i -X POST -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; http://debezium:8083/connectors/ -d @/controller/source-mysql-mariadb.storage.json
+                <h3 id="backup-strategies">Backup strategies<a class="headerlink" href="#backup-strategies" title="Permanent link">&para;</a></h3>
+<p>1.Set database recovery mode properly.<br />
+2.Full backup and log backup.<br />
+3.Shrink log file size after backup each time.<br />
+4.Check storage available size, delete obsoleted backup files.  </p>
+<h3 id="how-can-i-recover-database-which-deleted-log-file">How can i recover database which deleted log file?<a class="headerlink" href="#how-can-i-recover-database-which-deleted-log-file" title="Permanent link">&para;</a></h3>
+<p>1.Copy backup data files.<br />
+2.Retrieve the database files paths, including the filename.<br />
+3.Rename data filename.<br />
+4.Create the same name and paths database.<br />
+5.Stop SQL server service.<br />
+6.Delete new data file.<br />
+7.Rename the original data file.<br />
+8.Startup SQL server service.<br />
+9.Execute SQL as below.<br />
+<div class="highlight"><pre><span></span><code>USE MASTER
+GO
+ALTER DATABASE dbname SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+ALTER DATABASE dbname SET EMERGENCY
+DBCC CHECKDB(&#39;dbname&#39;,REPAIR_ALLOW_DATA_LOSS)
+ALTER DATABASE dbname SET MULTI_USER;
+GO
 </code></pre></div></p>
-<h3 id="sink">Sink<a class="headerlink" href="#sink" title="Permanent link">&para;</a></h3>
-<p>register sink:
-<div class="highlight"><pre><span></span><code>PODNAME=`kubectl -n common get pod -l app=debezium-controller | awk &#39;NR&gt;1{print $1}&#39;`
-kubectl -n common exec -it $PODNAME -- curl -i -X POST -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; http://debezium:8083/connectors/ -d @/controller/sink-mongodb-mariadb.storage.account-address.json
-</code></pre></div></p>
-<details class="faq"><summary>How do i operate registered connectors?</summary><div class="highlight"><pre><span></span><code>list all registered connectors:
-  PODNAME=`kubectl -n common get pod -l app=debezium-controller | awk &#39;NR&gt;1{print $1}&#39;`
-  kubectl -n common exec -it $PODNAME -- curl -X GET -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; http://debezium:8083/connectors
-delete particular connector:
-  PODNAME=`kubectl -n common get pod -l app=debezium-controller | awk &#39;NR&gt;1{print $1}&#39;`
-  kubectl -n common exec -it $PODNAME -- curl -X DELETE -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; http://debezium:8083/connectors/&lt;connector-name&gt;
-</code></pre></div>
-</details>
-<h3 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h3>
-<p>1.<a href="https://debezium.io/documentation/reference/connectors/mysql.html#enable-mysql-binlog" target="_blank">Enable mysql binlog</a><br />
-2.<a href="https://debezium.io/documentation/reference/architecture.html" target="_blank">Debezium architecture</a>  </p>
                 
               
               
@@ -702,7 +611,7 @@ delete particular connector:
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../sqlserver/" class="md-footer__link md-footer__link--prev" aria-label="Previous: SQLServer" rel="prev">
+        <a href="../../kubernetes/containerruntimes/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Container runtimes" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -711,20 +620,20 @@ delete particular connector:
               <span class="md-footer__direction">
                 Previous
               </span>
-              SQLServer
+              Container runtimes
             </div>
           </div>
         </a>
       
       
         
-        <a href="../../miscellaneous/snowflake/" class="md-footer__link md-footer__link--next" aria-label="Next: Snowflake" rel="next">
+        <a href="../cdc/" class="md-footer__link md-footer__link--next" aria-label="Next: Change data capture" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Snowflake
+              Change data capture
             </div>
           </div>
           <div class="md-footer__button md-icon">
