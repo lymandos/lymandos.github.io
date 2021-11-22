@@ -681,7 +681,7 @@ cat &lt;&lt;EOF | sudo tee /etc/docker/daemon.json
 }
 EOF
 </code></pre></div></p>
-<details class="faq"><summary>1.How can I speed up download images?</summary><div class="highlight"><pre><span></span><code>/etc/docker/daemon.json:
+<details class="faq"><summary>1.How can I speed up downloading images?</summary><div class="highlight"><pre><span></span><code>/etc/docker/daemon.json:
   &quot;registry-mirrors&quot;: [&quot;https://registry.cn-hangzhou.aliyuncs.com&quot;],
 </code></pre></div>
 </details>
@@ -691,7 +691,7 @@ EOF
   &quot;data-root&quot;: &quot;&lt;desired path&gt;&quot;,
 </code></pre></div>
 </details>
-<p>3.Restart Docker and enable on boot.<br />
+<p>3.Restart Docker and enable it on boot.<br />
 <div class="highlight"><pre><span></span><code>sudo systemctl enable docker
 sudo systemctl daemon-reload
 sudo systemctl restart docker

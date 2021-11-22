@@ -667,7 +667,7 @@ kubectl -n common exec -it $PODNAME -- curl -i -X POST -H &quot;Accept:applicati
 <div class="highlight"><pre><span></span><code>PODNAME=`kubectl -n common get pod -l app=debezium-controller | awk &#39;NR&gt;1{print $1}&#39;`
 kubectl -n common exec -it $PODNAME -- curl -i -X POST -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; http://debezium:8083/connectors/ -d @/controller/sink-mongodb-mariadb.storage.account-address.json
 </code></pre></div></p>
-<details class="faq"><summary>How do i operate registered connectors?</summary><div class="highlight"><pre><span></span><code>list all registered connectors:
+<details class="faq"><summary>How can I operate registered connectors?</summary><div class="highlight"><pre><span></span><code>list all registered connectors:
   PODNAME=`kubectl -n common get pod -l app=debezium-controller | awk &#39;NR&gt;1{print $1}&#39;`
   kubectl -n common exec -it $PODNAME -- curl -X GET -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; http://debezium:8083/connectors
 delete particular connector:

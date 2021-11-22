@@ -487,7 +487,7 @@
                 
                   <h1>Snowflake</h1>
                 
-                <details class="faq"><summary>How can i address snowflake clock moved backwards issue?</summary><div class="highlight"><pre><span></span><code>shell as root:
+                <details class="faq"><summary>How can I address the snowflake clock moved backward issue?</summary><div class="highlight"><pre><span></span><code>shell as root:
 crontab -e
   0 1 * * * systemctl start chronyd.service &gt; /dev/null
   0 3 * * * systemctl stop chronyd.service &gt; /dev/null
