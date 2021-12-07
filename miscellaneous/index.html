@@ -545,35 +545,36 @@
                 
                 <h3 id="snowflake">Snowflake<a class="headerlink" href="#snowflake" title="Permanent link">&para;</a></h3>
 <p>1.How can I address the snowflake clock moved backward issue?
-<div class="highlight"><pre><span></span><code>shell as root:
-crontab -e
+<div class="highlight"><pre><span></span><code># crontab -e
   0 1 * * * systemctl start chronyd.service &gt; /dev/null
   0 3 * * * systemctl stop chronyd.service &gt; /dev/null
 </code></pre></div></p>
 <h3 id="etcd">ETCD<a class="headerlink" href="#etcd" title="Permanent link">&para;</a></h3>
 <p>1.Backup</p>
-<details class="info"><summary>It is not necessary to stop static pod(kube-apiserver etc.) before backup ectd.</summary></details>
-<p><div class="highlight"><pre><span></span><code>ETCDCTL_API=3 etcdctl  \
+<details class="info"><summary>It is not necessary to stop static pods (kube-apiserver etc.) before backup ectd.</summary></details>
+<p><div class="highlight"><pre><span></span><code># ETCDCTL_API=3 etcdctl  \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   snapshot save /tmp/etcd-backup.db
 </code></pre></div>
 2.Restore</p>
-<details class="warning"><summary>stop static pod(kube-apiserver etc.) before restoring ectd. you can use <code>crictl ps</code> to confirm.</summary></details>
-<p>step1: mv /etc/kubernetes/manifests/*.yaml /etc/kubernetes/<br />
+<details class="warning"><summary>stop static pods (kube-apiserver etc.) before restoring ectd. you can use <code>crictl ps</code> to confirm.</summary></details>
+<p>step1: stop static pods.
+<div class="highlight"><pre><span></span><code># mv /etc/kubernetes/manifests/*.yaml /etc/kubernetes/
+</code></pre></div>
 step2: wait and make sure all static pods have been deleted (crictl ps).<br />
 step3: execute restore command.</p>
 <details class="info"><summary>pay attention to parameter --data-dir</summary></details>
-<p><div class="highlight"><pre><span></span><code>ETCDCTL_API=3 etcdctl \
+<p><div class="highlight"><pre><span></span><code># ETCDCTL_API=3 etcdctl \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   snapshot restore --data-dir=/var/lib/etcd-backup /tmp/etcd-backup.db 
 </code></pre></div>
 step4: modify hostPath to the restored path.
-vi /etc/kubernetes/etcd.yaml
-<div class="highlight"><pre><span></span><code>  volumes:
+<div class="highlight"><pre><span></span><code># vi /etc/kubernetes/etcd.yaml
+  volumes:
   - hostPath:
       path: /etc/kubernetes/pki/etcd
       type: DirectoryOrCreate
@@ -583,7 +584,9 @@ vi /etc/kubernetes/etcd.yaml
       type: DirectoryOrCreate
     name: etcd-data
 </code></pre></div>
-step5: mv /etc/kubernetes/*.yaml /etc/kubernetes/manifests/  </p>
+step5: restore static pods
+<div class="highlight"><pre><span></span><code># mv /etc/kubernetes/*.yaml /etc/kubernetes/manifests/
+</code></pre></div></p>
                 
               
               
