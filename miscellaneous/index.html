@@ -16,7 +16,7 @@
         <link rel="canonical" href="https://lymandos.github.io/miscellaneous/">
       
       <link rel="icon" href="../assets/favicon-custom.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.2.0">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-7.2.0">
     
     
       
@@ -587,7 +587,9 @@
 </code></pre></div></p>
 <h3 id="etcd">ETCD<a class="headerlink" href="#etcd" title="Permanent link">&para;</a></h3>
 <p>1.Backup</p>
-<details class="info"><summary>It is not necessary to stop static pods (kube-apiserver etc.) before backup ectd.</summary></details>
+<details class="info">
+<summary>It is not necessary to stop static pods (kube-apiserver etc.) before backup ectd.</summary>
+</details>
 <p><div class="highlight"><pre><span></span><code># ETCDCTL_API=3 etcdctl  \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key \
@@ -595,13 +597,17 @@
   snapshot save /tmp/etcd-backup.db
 </code></pre></div>
 2.Restore</p>
-<details class="warning"><summary>stop static pods (kube-apiserver etc.) before restoring ectd. you can use <code>crictl ps</code> to confirm.</summary></details>
+<details class="warning">
+<summary>stop static pods (kube-apiserver etc.) before restoring ectd. you can use <code>crictl ps</code> to confirm.</summary>
+</details>
 <p>step1: stop static pods.
 <div class="highlight"><pre><span></span><code># mv /etc/kubernetes/manifests/*.yaml /etc/kubernetes/
 </code></pre></div>
 step2: wait and make sure all static pods have been deleted (crictl ps).<br />
 step3: execute restore command.</p>
-<details class="info"><summary>pay attention to parameter --data-dir</summary></details>
+<details class="info">
+<summary>pay attention to parameter --data-dir</summary>
+</details>
 <p><div class="highlight"><pre><span></span><code># ETCDCTL_API=3 etcdctl \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key \
@@ -718,7 +724,7 @@ step5: restore static pods
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.tabs.link", "header.autohide", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.tabs.link", "header.autohide", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../assets/javascripts/workers/search.53c85856.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.716f8af4.min.js"></script>

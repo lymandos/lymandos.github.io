@@ -16,7 +16,7 @@
         <link rel="canonical" href="https://lymandos.github.io/kubernetes/containerruntimes/">
       
       <link rel="icon" href="../../assets/favicon-custom.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.2.0">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-7.2.0">
     
     
       
@@ -649,7 +649,9 @@ sudo sed -i &#39;/\[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd.run
 sudo sed -i &quot;s|k8s.gcr.io|registry.aliyuncs.com/google_containers|g&quot;  /etc/containerd/config.toml
 sudo sed -i &quot;s|registry-1.docker.io|registry.aliyuncs.com|g&quot;  /etc/containerd/config.toml
 </code></pre></div></p>
-<details class="faq"><summary>How can I change the default location?</summary><div class="highlight"><pre><span></span><code>sudo mkdir -p /data/containerd
+<details class="faq">
+<summary>How can I change the default location?</summary>
+<div class="highlight"><pre><span></span><code>sudo mkdir -p /data/containerd
 sudo sed -i &#39;s|/var/lib/containerd|/data/containerd|g&#39;  /etc/containerd/config.toml
 </code></pre></div>
 </details>
@@ -683,11 +685,15 @@ sudo systemctl daemon-reload
 sudo systemctl restart containerd
 sudo systemctl status containerd
 </code></pre></div></p>
-<details class="caution"><summary>Make sure the right path of containerd.</summary><div class="highlight"><pre><span></span><code>ExecStart=/usr/bin/containerd
+<details class="caution">
+<summary>Make sure the right path of containerd.</summary>
+<div class="highlight"><pre><span></span><code>ExecStart=/usr/bin/containerd
 </code></pre></div>
 </details>
 <h3 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h3>
-<details class="warning"><summary>Kubernetes is deprecating Docker as a container runtime after v1.20.</summary><p><a href="https://kubernetes.io/blog/2020/12/02/dockershim-faq/" target="_blank">Dockershim Deprecation FAQ</a> </p>
+<details class="warning">
+<summary>Kubernetes is deprecating Docker as a container runtime after v1.20.</summary>
+<p><a href="https://kubernetes.io/blog/2020/12/02/dockershim-faq/" target="_blank">Dockershim Deprecation FAQ</a> </p>
 </details>
 <p>1.Install docker engine on each of k8s nodes.  </p>
 <p>2.Configure the docker daemon.<br />
@@ -703,11 +709,15 @@ cat &lt;&lt;EOF | sudo tee /etc/docker/daemon.json
 }
 EOF
 </code></pre></div></p>
-<details class="faq"><summary>1.How can I speed up downloading images?</summary><div class="highlight"><pre><span></span><code>/etc/docker/daemon.json:
+<details class="faq">
+<summary>1.How can I speed up downloading images?</summary>
+<div class="highlight"><pre><span></span><code>/etc/docker/daemon.json:
   &quot;registry-mirrors&quot;: [&quot;https://registry.cn-hangzhou.aliyuncs.com&quot;],
 </code></pre></div>
 </details>
-<details class="faq"><summary>2.How can I change the default location for Docker images?</summary><div class="highlight"><pre><span></span><code>shell:
+<details class="faq">
+<summary>2.How can I change the default location for Docker images?</summary>
+<div class="highlight"><pre><span></span><code>shell:
   sudo mkdir -p &lt;desired path&gt;
 /etc/docker/daemon.json:
   &quot;data-root&quot;: &quot;&lt;desired path&gt;&quot;,
@@ -833,7 +843,7 @@ sudo systemctl restart docker
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "header.autohide", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "header.autohide", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.53c85856.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.716f8af4.min.js"></script>
